@@ -1,0 +1,4 @@
+rootProject.name = 'FuckTouchID'
+include 'src:main:Native'
+findProject(':src:main:Native')?.name = 'Native'
+
