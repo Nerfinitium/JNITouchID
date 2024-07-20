@@ -11,7 +11,6 @@ JNIEXPORT jboolean JNICALL Java_TouchID_authenticate(JNIEnv *env, jobject obj) {
 
         // Check if Touch ID is available
         if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
-            // Perform the Touch ID authentication
             dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
             __block jboolean success = JNI_FALSE;
 
@@ -26,11 +25,9 @@ JNIEXPORT jboolean JNICALL Java_TouchID_authenticate(JNIEnv *env, jobject obj) {
                 dispatch_semaphore_signal(semaphore);
             }];
 
-            // Wait for the authentication result
             dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
             return success;
         } else {
-            // Touch ID is not available
             return JNI_FALSE;
         }
     }

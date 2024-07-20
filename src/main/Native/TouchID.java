@@ -1,8 +1,6 @@
 public class TouchID {
-    // Native method declaration
     public native boolean authenticate();
 
-    // Load the native library
     static {
         System.loadLibrary("TouchIDNative");
     }
